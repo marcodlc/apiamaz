@@ -1,4 +1,5 @@
 using ApiAmaz.Model;
+using ApiAmaz.Security;
 using Microsoft.EntityFrameworkCore;
 
 namespace ApiAmaz.Data;
@@ -94,13 +95,13 @@ public class AmazDbContext : DbContext
         #endregion
         #region USUARIO
         List<User> UsersInit = new List<User>();
-        UsersInit.Add(new User(){Username="admin",SoftwareName="WebAmaz",Password="default",Creator="admin",DateCreated = DateTime.Now,Updater="admin",WorkerCode = Guid.Parse("dcecaf47-895a-4adb-92b5-0a62336619fc")});
+        UsersInit.Add(new User(){Username="admin",SoftwareName="WebAmaz",Password="s8BK/+Kxf5HWZwxFjeMt9A==",Creator="admin",DateCreated = DateTime.Now,Updater="admin",WorkerCode = Guid.Parse("dcecaf47-895a-4adb-92b5-0a62336619fc")});
         modelBuilder.Entity<User>(user =>
             {
                 user.HasKey(c => new {c.Username, c.Password});
                 user.ToTable("USUARIO");
                 user.Property(c => c.Username).HasColumnName("USUARIO").HasMaxLength(50);
-                user.Property(c => c.Password).HasColumnName("CLAVE").HasMaxLength(50).IsUnicode(false);
+                user.Property(c => c.Password).HasColumnName("CLAVE").HasMaxLength(100).IsUnicode(false);
                 user.Property(c => c.SoftwareName).HasColumnName("APLICACION").HasMaxLength(50).IsUnicode(false);
                 user.Property(c => c.WorkerCode).HasColumnName("TRABAJADOR");
                 user.HasOne(c => c.Worker).WithMany(c => c.Users).HasForeignKey(c => c.WorkerCode);

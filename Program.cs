@@ -10,7 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 //conexion a base de datos en memoria
 //builder.Services.AddDbContext<TareasContext>(p => p.UseInMemoryDatabase("TareasDB"));
 //conexion a base de datos sql server
-builder.Services.AddSqlServer<AmazDbContext>(builder.Configuration.GetConnectionString("cnAmaz"));
+//builder.Services.AddSqlServer<AmazDbContext>(builder.Configuration.GetConnectionString("cnAmaz"));
+builder.Services.AddSqlServer<AmazDbContext>(builder.Configuration["ConnectionStrings:sqlConnection"]);
 
 // Add services to the container.
 

@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Text;
 using ApiAmaz.Data;
 using ApiAmaz.Model;
+using ApiAmaz.Security;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -27,7 +28,7 @@ public class TokenController : ControllerBase
     {
         if (userData != null && userData.Username != null && userData.Password != null)
         {
-            var user = await  GetUser(userData.Username, userData.Password);
+            var user = await  GetUser(userData.Username,SecurityConfig.ENCRYPTATION_FOR_ASP(userData.Password));
 
             if (user != null)
             {
